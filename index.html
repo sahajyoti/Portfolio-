@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debojyoti Saha | Senior Biomedical Engineer & Developer</title>
+    
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2864/2864275.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        medical: '#0d9488',
+                        softlight: '#fdfdfd',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.4s ease;
+        }
+        /* Soft Light Mode - Not Eye Straining */
+        .light-bg { background-color: #f8fafc; }
+        
+        /* Custom Cursor */
+        #cursor {
+            width: 20px; height: 20px;
+            border: 2px solid #0d9488;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(15, 23, 42, 0.8); }
+        
+        .experience-card:hover { transform: translateY(-10px); }
+    </style>
+</head>
+
+<body class="light-bg text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+    <!-- Custom Cursor -->
+    <div id="cursor" class="hidden md:block"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold text-medical tracking-tighter">DEBOJYOTI<span class="text-slate-400">.SAHA</span></a>
+            
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-widest">
+                    <a href="#about" class="hover:text-medical transition">Professional Profile</a>
+                    <a href="#experience" class="hover:text-medical transition">Experience</a>
+                    <a href="#skills" class="hover:text-medical transition">Expertise</a>
+                </div>
+                <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-yellow-400 transition-all">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex items-center pt-20 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <div class="inline-block px-4 py-1 rounded-full bg-medical/10 text-medical font-bold text-xs mb-6 uppercase tracking-widest">
+                    Senior Executive Engineer
+                </div>
+                <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-none tracking-tight">
+                    Healthcare <br><span class="text-medical">Refined.</span>
+                </h1>
+                <p class="text-xl text-slate-500 dark:text-slate-400 mb-10 leading-relaxed max-w-xl">
+                    Senior Executive Biomedical Engineer specializing in clinical technology life-cycle management and full-stack healthcare software solutions.
+                </p>
+                <div class="flex flex-wrap gap-5">
+                    <a href="#contact" class="bg-medical text-white px-10 py-4 rounded-xl font-bold hover:shadow-2xl transition-all hover:scale-105">Get in Touch</a>
+                    <div class="flex gap-4">
+                        <a href="https://linkedin.com/in/debojyotisahatech" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 shadow-md hover:text-medical transition-all"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="https://github.com/sahajyoti" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 shadow-md hover:text-medical transition-all"><i class="fab fa-github text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative" data-aos="zoom-out" data-aos-delay="200">
+                <div class="relative z-10 w-full aspect-square rounded-[3rem] overflow-hidden border-8 border-white dark:border-slate-900 shadow-2xl">
+                    <img src="profile.jpg" alt="Debojyoti Saha" class="w-full h-full object-cover bg-slate-200" onerror="this.src='https://via.placeholder.com/600x600?text=Senior+Engineer'">
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-medical/20 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-32 px-6 bg-slate-100/50 dark:bg-slate-900/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl font-extrabold mb-4">Professional Trajectory</h2>
+                <div class="w-20 h-1.5 bg-medical mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Siemens -->
+                <div data-aos="fade-up" class="experience-card bg-white dark:bg-slate-800 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700 grid md:grid-cols-3 gap-8">
+                    <div class="col-span-1">
+                        <h3 class="text-2xl font-bold">Siemens Healthineers</h3>
+                        <p class="text-medical font-bold text-sm uppercase">Industrial Training | 2023</p>
+                    </div>
+                    <div class="col-span-2 text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc space-y-3 pl-4">
+                            <li>Managed life-cycle optimization for high-end Imaging Modalities (CT/MRI/X-Ray).</li>
+                            <li>Coordinated with clinical teams to ensure 99.9% uptime of diagnostic equipment.</li>
+                            <li>Supported the implementation of digital healthcare workflows and DICOM networking.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Manipal -->
+                <div data-aos="fade-up" class="experience-card bg-white dark:bg-slate-800 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700 grid md:grid-cols-3 gap-8">
+                    <div class="col-span-1">
+                        <h3 class="text-2xl font-bold">Manipal Hospital (AMRI)</h3>
+                        <p class="text-medical font-bold text-sm uppercase">Engineering Intern | 2023</p>
+                    </div>
+                    <div class="col-span-2 text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc space-y-3 pl-4">
+                            <li>Performed preventive maintenance and calibration for critical life-support systems (Ventilators, Defibrillators).</li>
+                            <li>Conducted technical audits for NABH/NABL accreditation compliance.</li>
+                            <li>Evaluated medical device performance metrics to improve patient safety protocols.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Development Internships -->
+                <div data-aos="fade-up" class="bg-slate-800 text-white p-8 md:p-12 rounded-[2rem] shadow-xl grid md:grid-cols-3 gap-8">
+                    <div class="col-span-1">
+                        <h3 class="text-2xl font-bold text-medical">Digital Transformation</h3>
+                        <p class="text-slate-400 text-sm uppercase">Web & UI/UX | 2023</p>
+                    </div>
+                    <div class="col-span-2 text-slate-300">
+                        <p class="mb-4">Across **Null Class, Bharat Intern, and Oasis Infobyte**, I spearheaded the development of modern web architectures:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">MERN Stack</span>
+                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">Responsive UI</span>
+                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">Node.js API</span>
+                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">Tailwind Architecture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills (Expertise) -->
+    <section id="skills" class="py-32 px-6 bg-white dark:bg-slate-950">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-extrabold mb-20 text-center" data-aos="fade-up">Core Expertise</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+                <div data-aos="zoom-in" class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4 class="font-bold">Biomedical</h4>
+                    <p class="text-xs text-slate-400 mt-2">Imaging, Signal Processing, Medical Devices</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="100" class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4 class="font-bold">Programming</h4>
+                    <p class="text-xs text-slate-400 mt-2">Java, Python, C++, JavaScript</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="200" class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h4 class="font-bold">Web Stack</h4>
+                    <p class="text-xs text-slate-400 mt-2">React, Node.js, Tailwind, TypeScript</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300" class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h4 class="font-bold">Compliance</h4>
+                    <p class="text-xs text-slate-400 mt-2">ISO 13485, NABH, Patient Safety</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto rounded-[3rem] bg-slate-900 p-12 text-white relative overflow-hidden shadow-2xl">
+            <div class="relative z-10 grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Let's build the <br>future of health.</h2>
+                    <p class="text-slate-400 mb-10 text-lg">Open for strategic consultations, senior engineering roles, or tech collaborations.</p>
+                    <div class="space-y-6">
+                        <a href="mailto:debojyotisaha732138@gmail.com" class="flex items-center gap-4 hover:text-medical transition text-xl"><i class="fas fa-envelope"></i> Email Me</a>
+                        <div class="flex items-center gap-4 text-xl"><i class="fas fa-phone"></i> +91 7076969374</div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <a href="https://linkedin.com/in/debojyotisahatech" target="_blank" class="p-6 bg-slate-800 rounded-2xl flex items-center justify-between group hover:bg-medical transition-all">
+                        <span>LinkedIn Profile</span>
+                        <i class="fab fa-linkedin text-2xl group-hover:scale-125 transition"></i>
+                    </a>
+                    <a href="https://github.com/sahajyoti" target="_blank" class="p-6 bg-slate-800 rounded-2xl flex items-center justify-between group hover:bg-medical transition-all">
+                        <span>GitHub Profile</span>
+                        <i class="fab fa-github text-2xl group-hover:scale-125 transition"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-medical/20 blur-[120px]"></div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-slate-400 text-sm uppercase tracking-widest border-t border-slate-200 dark:border-slate-800">
+        Debojyoti Saha &copy; 2024 | Engineering the Future
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Custom Cursor Movement
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Click effect on cursor
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            if (html.classList.contains('dark')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.theme = 'dark';
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.theme = 'light';
+            }
+        });
+    </script>
+</body>
+</html>
