@@ -1,20 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Debojyoti Saha | Senior Biomedical Engineer & Developer</title>
+    <title>Debojyoti Saha | Senior Executive Biomedical Engineer</title>
     
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2864/2864275.png">
+    <link rel="icon" type="image/jpeg" href="profile.jpg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        medical: '#0d9488',
-                        softlight: '#fdfdfd',
+                    colors: { medical: '#0d9488' },
+                    animation: {
+                        'gradient-fast': 'gradient-x 8s ease infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'netflix-zoom': 'netflix-zoom 3.5s ease-in-out forwards',
+                        'reveal-text': 'reveal-text 1.5s ease-out 1s forwards',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+                        },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        'netflix-zoom': {
+                            '0%': { transform: 'scale(0.5)', opacity: '0' },
+                            '20%': { opacity: '1' },
+                            '80%': { transform: 'scale(1.1)', opacity: '1' },
+                            '100%': { transform: 'scale(1.8)', opacity: '0' },
+                        },
+                        'reveal-text': {
+                            '0%': { opacity: '0', letterSpacing: '0.8em', filter: 'blur(10px)' },
+                            '100%': { opacity: '1', letterSpacing: '0.1em', filter: 'blur(0)' },
+                        }
                     }
                 }
             }
@@ -26,136 +47,153 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.4s ease;
-        }
-        /* Soft Light Mode - Not Eye Straining */
-        .light-bg { background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; cursor: none; }
         
-        /* Custom Cursor */
-        #cursor {
-            width: 20px; height: 20px;
-            border: 2px solid #0d9488;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
+        #preloader {
+            position: fixed; inset: 0; background: #020617; z-index: 10000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .intro-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid #0d9488; margin-bottom: 2rem; }
+        .intro-name { color: #0d9488; font-weight: 800; font-size: 2rem; opacity: 0; text-align: center;}
+        
+        /* Moving Gradient Background - High Visibility in Light Mode */
+        .animated-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(-45deg, #0d948844, #3b82f644, #facc1544, #0d948844);
+            background-size: 400% 400%;
+            animation: gradient-x 10s ease infinite;
+        }
+        .dark .animated-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #134e4a, #042f2e);
+            background-size: 400% 400%;
         }
 
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
-        .dark .glass { background: rgba(15, 23, 42, 0.8); }
-        
-        .experience-card:hover { transform: translateY(-10px); }
+        #cursor {
+            width: 20px; height: 20px; border: 2px solid #0d9488; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease-out;
+        }
+        #cursor.active { transform: scale(3); background: rgba(13, 148, 136, 0.1); }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: #0d9488; z-index: 100; width: 0%; }
+        .glass { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); }
+        .dark .glass { background: rgba(15, 23, 42, 0.6); }
+        .experience-card { transition: all 0.3s ease; }
+        .experience-card:hover { transform: translateY(-5px); background: rgba(13, 148, 136, 0.05); }
     </style>
 </head>
 
-<body class="light-bg text-slate-800 dark:bg-slate-950 dark:text-slate-100">
-    <!-- Custom Cursor -->
+<body class="text-slate-800 dark:text-slate-100 overflow-hidden">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="profile.jpg" class="intro-img animate-netflix-zoom" alt="Debojyoti Saha">
+        <h2 class="intro-name animate-reveal-text uppercase">Debojyoti Saha</h2>
+        <p class="intro-name animate-reveal-text text-white text-sm mt-2" style="animation-delay: 1.5s;">Healthcare Innovator</p>
+    </div>
+
+    <div class="animated-bg"></div>
+    <div id="scroll-progress"></div>
     <div id="cursor" class="hidden md:block"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass border-b border-slate-200 dark:border-slate-800">
+    <!-- Nav -->
+    <nav class="fixed w-full z-50 glass border-b border-slate-200/50 dark:border-slate-800/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-extrabold text-medical tracking-tighter">DEBOJYOTI<span class="text-slate-400">.SAHA</span></a>
-            
+            <a href="#" class="text-xl font-extrabold text-medical tracking-tighter">DEBOJYOTI<span class="text-slate-400">.SAHA</span></a>
             <div class="flex items-center gap-6">
-                <div class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-widest">
-                    <a href="#about" class="hover:text-medical transition">Professional Profile</a>
-                    <a href="#experience" class="hover:text-medical transition">Experience</a>
-                    <a href="#skills" class="hover:text-medical transition">Expertise</a>
+                <div class="hidden md:flex space-x-6 font-semibold text-[10px] uppercase tracking-[0.2em]">
+                    <a href="#experience" class="hover:text-medical">Experience</a>
+                    <a href="#certificates" class="hover:text-medical">Certificates</a>
+                    <a href="#projects" class="hover:text-medical">Projects</a>
                 </div>
-                <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-yellow-400 transition-all">
-                    <i id="theme-icon" class="fas fa-moon"></i>
+                <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200/20 dark:bg-slate-800/50">
+                    <i id="theme-icon" class="fas fa-sun"></i>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section id="home" class="min-h-screen flex items-center pt-20 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section class="min-h-screen flex items-center pt-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
-                <div class="inline-block px-4 py-1 rounded-full bg-medical/10 text-medical font-bold text-xs mb-6 uppercase tracking-widest">
-                    Senior Executive Engineer
+                <div class="inline-block px-3 py-1 rounded-full bg-medical/10 text-medical font-bold text-[10px] uppercase mb-6 tracking-widest">
+                    Senior Executive Biomedical Engineer
                 </div>
-                <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-none tracking-tight">
-                    Healthcare <br><span class="text-medical">Refined.</span>
+                <h1 class="text-6xl md:text-8xl font-black mb-6 leading-[0.85] tracking-tighter">
+                    Healthcare <br><span class="text-medical">Innovator.</span>
                 </h1>
-                <p class="text-xl text-slate-500 dark:text-slate-400 mb-10 leading-relaxed max-w-xl">
-                    Senior Executive Biomedical Engineer specializing in clinical technology life-cycle management and full-stack healthcare software solutions.
+                <p class="text-lg text-slate-500 dark:text-slate-400 mb-8 max-w-lg leading-relaxed">
+                    Engineering precision at <b>AM Medical Centre</b>. Bridging clinical technology with innovative web development solutions.
                 </p>
-                <div class="flex flex-wrap gap-5">
-                    <a href="#contact" class="bg-medical text-white px-10 py-4 rounded-xl font-bold hover:shadow-2xl transition-all hover:scale-105">Get in Touch</a>
-                    <div class="flex gap-4">
-                        <a href="https://linkedin.com/in/debojyotisahatech" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 shadow-md hover:text-medical transition-all"><i class="fab fa-linkedin-in text-xl"></i></a>
-                        <a href="https://github.com/sahajyoti" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 shadow-md hover:text-medical transition-all"><i class="fab fa-github text-xl"></i></a>
-                    </div>
+                <div class="flex gap-4 items-center">
+                    <a href="#contact" class="bg-medical text-white px-10 py-4 rounded-xl font-bold shadow-xl shadow-medical/20 hover:scale-105 transition-all">Get in Touch</a>
+                    <a href="https://linkedin.com/in/debojyotisahatech" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-xl glass border border-slate-300 dark:border-slate-700 hover:text-medical"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            
-            <div class="relative" data-aos="zoom-out" data-aos-delay="200">
-                <div class="relative z-10 w-full aspect-square rounded-[3rem] overflow-hidden border-8 border-white dark:border-slate-900 shadow-2xl">
-                    <img src="profile.jpg" alt="Debojyoti Saha" class="w-full h-full object-cover bg-slate-200" onerror="this.src='https://via.placeholder.com/600x600?text=Senior+Engineer'">
+            <div class="relative" data-aos="zoom-in">
+                <div class="w-full aspect-square rounded-[3rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl animate-float">
+                    <img src="profile.jpg" alt="Debojyoti Saha" class="w-full h-full object-cover">
                 </div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-medical/20 rounded-full blur-3xl"></div>
             </div>
         </div>
     </section>
 
-    <!-- Experience -->
-    <section id="experience" class="py-32 px-6 bg-slate-100/50 dark:bg-slate-900/50">
+    <!-- Professional Experience -->
+    <section id="experience" class="py-24 px-6">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="text-4xl font-extrabold mb-4">Professional Trajectory</h2>
-                <div class="w-20 h-1.5 bg-medical mx-auto rounded-full"></div>
-            </div>
-
+            <h2 class="text-3xl font-black mb-16 text-center" data-aos="fade-up">Professional Journey</h2>
+            
             <div class="space-y-12">
-                <!-- Siemens -->
-                <div data-aos="fade-up" class="experience-card bg-white dark:bg-slate-800 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700 grid md:grid-cols-3 gap-8">
-                    <div class="col-span-1">
-                        <h3 class="text-2xl font-bold">Siemens Healthineers</h3>
-                        <p class="text-medical font-bold text-sm uppercase">Industrial Training | 2023</p>
+                <!-- AM Medical Centre -->
+                <div data-aos="fade-up" class="experience-card glass p-10 rounded-[2.5rem] relative overflow-hidden border border-medical/20">
+                    <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+                        <div>
+                            <h3 class="text-3xl font-bold">AM Medical Centre</h3>
+                            <p class="text-medical font-bold text-sm uppercase">Kolkata • Full-time • 1 yr</p>
+                        </div>
+                        <div class="bg-medical/10 px-4 py-2 rounded-xl text-right">
+                            <p class="text-medical font-black text-xs uppercase tracking-tighter">Feb 2025 - Present</p>
+                        </div>
                     </div>
-                    <div class="col-span-2 text-slate-600 dark:text-slate-400">
-                        <ul class="list-disc space-y-3 pl-4">
-                            <li>Managed life-cycle optimization for high-end Imaging Modalities (CT/MRI/X-Ray).</li>
-                            <li>Coordinated with clinical teams to ensure 99.9% uptime of diagnostic equipment.</li>
-                            <li>Supported the implementation of digital healthcare workflows and DICOM networking.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Manipal -->
-                <div data-aos="fade-up" class="experience-card bg-white dark:bg-slate-800 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700 grid md:grid-cols-3 gap-8">
-                    <div class="col-span-1">
-                        <h3 class="text-2xl font-bold">Manipal Hospital (AMRI)</h3>
-                        <p class="text-medical font-bold text-sm uppercase">Engineering Intern | 2023</p>
-                    </div>
-                    <div class="col-span-2 text-slate-600 dark:text-slate-400">
-                        <ul class="list-disc space-y-3 pl-4">
-                            <li>Performed preventive maintenance and calibration for critical life-support systems (Ventilators, Defibrillators).</li>
-                            <li>Conducted technical audits for NABH/NABL accreditation compliance.</li>
-                            <li>Evaluated medical device performance metrics to improve patient safety protocols.</li>
-                        </ul>
+                    <div class="space-y-6 border-l-2 border-medical/30 pl-6 ml-2">
+                        <div>
+                            <h4 class="font-bold text-xl">Senior Executive Biomedical Engineer</h4>
+                            <p class="text-sm opacity-60">Aug 2025 - Present • 6 mos</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg opacity-80">Biomedical Engineer</h4>
+                            <p class="text-sm opacity-60">Feb 2025 - Aug 2025 • 7 mos</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Development Internships -->
-                <div data-aos="fade-up" class="bg-slate-800 text-white p-8 md:p-12 rounded-[2rem] shadow-xl grid md:grid-cols-3 gap-8">
-                    <div class="col-span-1">
-                        <h3 class="text-2xl font-bold text-medical">Digital Transformation</h3>
-                        <p class="text-slate-400 text-sm uppercase">Web & UI/UX | 2023</p>
+                <!-- Ambassador Roles -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div data-aos="fade-up" class="glass p-8 rounded-[2rem] border border-slate-200/20">
+                        <h3 class="font-bold text-xl mb-4">Leadership & Outreach</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-medical font-bold text-xs">1STOP.AI</p>
+                                <p class="font-bold">Campus Ambassador</p>
+                                <p class="text-[10px] opacity-60">Nov 2022 - Present</p>
+                            </div>
+                            <div>
+                                <p class="text-medical font-bold text-xs">INTERNSHALA & PW</p>
+                                <p class="font-bold">Campus Ambassador</p>
+                                <p class="text-[10px] opacity-60">Jun 2023 - Feb 2025</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-span-2 text-slate-300">
-                        <p class="mb-4">Across **Null Class, Bharat Intern, and Oasis Infobyte**, I spearheaded the development of modern web architectures:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">MERN Stack</span>
-                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">Responsive UI</span>
-                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">Node.js API</span>
-                            <span class="bg-slate-700 px-3 py-1 rounded-md text-xs">Tailwind Architecture</span>
+                    <div data-aos="fade-up" data-aos-delay="100" class="glass p-8 rounded-[2rem] border border-slate-200/20">
+                        <h3 class="font-bold text-xl mb-4">Rotaract Club of NSEC</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-medical font-bold text-xs">TECH HEAD</p>
+                                <p class="text-sm">May 2023 - Feb 2025</p>
+                            </div>
+                            <div>
+                                <p class="text-medical font-bold text-xs">TECH MEMBER</p>
+                                <p class="text-sm">Jan 2022 - Feb 2025</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,108 +201,132 @@
         </div>
     </section>
 
-    <!-- Skills (Expertise) -->
-    <section id="skills" class="py-32 px-6 bg-white dark:bg-slate-950">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-extrabold mb-20 text-center" data-aos="fade-up">Core Expertise</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
-                <div data-aos="zoom-in" class="text-center group">
-                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
-                        <i class="fas fa-heartbeat"></i>
+    <!-- Certificates -->
+    <section id="certificates" class="py-24 px-6 bg-slate-900/5">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-black mb-16 text-center" data-aos="fade-up">Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- AMRI -->
+                <div data-aos="zoom-in" class="glass p-6 rounded-3xl border border-medical/10 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-hospital text-medical mb-4 text-2xl"></i>
+                        <h4 class="font-bold text-sm leading-tight">Biomedical Engineer Trainee</h4>
+                        <p class="text-[10px] opacity-60 mt-2">AMRI Hospitals • Aug 2023</p>
                     </div>
-                    <h4 class="font-bold">Biomedical</h4>
-                    <p class="text-xs text-slate-400 mt-2">Imaging, Signal Processing, Medical Devices</p>
+                    <p class="text-[9px] mt-4 font-bold text-medical">Skills: X-ray, Biomedical Eng.</p>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="100" class="text-center group">
-                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
-                        <i class="fas fa-code"></i>
+                <!-- GL HTML -->
+                <div data-aos="zoom-in" data-aos-delay="100" class="glass p-6 rounded-3xl border border-medical/10 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-certificate text-medical mb-4 text-2xl"></i>
+                        <h4 class="font-bold text-sm leading-tight">Front End Development - HTML</h4>
+                        <p class="text-[10px] opacity-60 mt-2">Great Learning • Sep 2022</p>
                     </div>
-                    <h4 class="font-bold">Programming</h4>
-                    <p class="text-xs text-slate-400 mt-2">Java, Python, C++, JavaScript</p>
+                    <p class="text-[9px] mt-4 opacity-50 font-mono">ID: YWCEQDBX</p>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="200" class="text-center group">
-                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
-                        <i class="fas fa-layer-group"></i>
+                <!-- GL Prog -->
+                <div data-aos="zoom-in" data-aos-delay="200" class="glass p-6 rounded-3xl border border-medical/10 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-code text-medical mb-4 text-2xl"></i>
+                        <h4 class="font-bold text-sm leading-tight">Programming Basics</h4>
+                        <p class="text-[10px] opacity-60 mt-2">Great Learning • Oct 2021</p>
                     </div>
-                    <h4 class="font-bold">Web Stack</h4>
-                    <p class="text-xs text-slate-400 mt-2">React, Node.js, Tailwind, TypeScript</p>
+                    <p class="text-[9px] mt-4 opacity-50 font-mono">ID: TTBBSMYJ</p>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="300" class="text-center group">
-                    <div class="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-900 rounded-3xl flex items-center justify-center text-3xl mb-4 group-hover:bg-medical group-hover:text-white transition-all shadow-sm">
-                        <i class="fas fa-shield-virus"></i>
+                <!-- NullClass -->
+                <div data-aos="zoom-in" data-aos-delay="300" class="glass p-6 rounded-3xl border border-medical/10 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-globe text-medical mb-4 text-2xl"></i>
+                        <h4 class="font-bold text-sm leading-tight">Web Development Intern</h4>
+                        <p class="text-[10px] opacity-60 mt-2">NullClass • 2022</p>
                     </div>
-                    <h4 class="font-bold">Compliance</h4>
-                    <p class="text-xs text-slate-400 mt-2">ISO 13485, NABH, Patient Safety</p>
+                    <p class="text-[9px] mt-4 font-bold text-medical">Project completion</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="py-32 px-6">
-        <div class="max-w-5xl mx-auto rounded-[3rem] bg-slate-900 p-12 text-white relative overflow-hidden shadow-2xl">
-            <div class="relative z-10 grid md:grid-cols-2 gap-12">
-                <div>
-                    <h2 class="text-4xl font-bold mb-6">Let's build the <br>future of health.</h2>
-                    <p class="text-slate-400 mb-10 text-lg">Open for strategic consultations, senior engineering roles, or tech collaborations.</p>
-                    <div class="space-y-6">
-                        <a href="mailto:debojyotisaha732138@gmail.com" class="flex items-center gap-4 hover:text-medical transition text-xl"><i class="fas fa-envelope"></i> Email Me</a>
-                        <div class="flex items-center gap-4 text-xl"><i class="fas fa-phone"></i> +91 7076969374</div>
-                    </div>
+    <!-- Projects -->
+    <section id="projects" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-black mb-16 text-center" data-aos="fade-up">Featured Projects</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- IV Bag -->
+                <div class="glass p-8 rounded-[2rem] border border-transparent hover:border-medical/30 transition-all">
+                    <div class="w-10 h-10 bg-medical/10 text-medical rounded-lg flex items-center justify-center mb-4"><i class="fas fa-microchip"></i></div>
+                    <h3 class="font-bold text-lg mb-2">IoT IV Bag Monitoring</h3>
+                    <p class="text-xs opacity-60">Real-time smart monitoring system to track IV fluid levels.</p>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <a href="https://linkedin.com/in/debojyotisahatech" target="_blank" class="p-6 bg-slate-800 rounded-2xl flex items-center justify-between group hover:bg-medical transition-all">
-                        <span>LinkedIn Profile</span>
-                        <i class="fab fa-linkedin text-2xl group-hover:scale-125 transition"></i>
-                    </a>
-                    <a href="https://github.com/sahajyoti" target="_blank" class="p-6 bg-slate-800 rounded-2xl flex items-center justify-between group hover:bg-medical transition-all">
-                        <span>GitHub Profile</span>
-                        <i class="fab fa-github text-2xl group-hover:scale-125 transition"></i>
-                    </a>
+                <!-- Payment Form -->
+                <div class="glass p-8 rounded-[2rem] border border-transparent hover:border-medical/30 transition-all">
+                    <div class="w-10 h-10 bg-medical/10 text-medical rounded-lg flex items-center justify-center mb-4"><i class="fas fa-credit-card"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Secure Payment Form</h3>
+                    <p class="text-xs opacity-60">Developed a responsive payment UI with validation logic using HTML/CSS/JS.</p>
+                </div>
+                <!-- Resume -->
+                <div class="glass p-8 rounded-[2rem] border border-transparent hover:border-medical/30 transition-all">
+                    <div class="w-10 h-10 bg-medical/10 text-medical rounded-lg flex items-center justify-center mb-4"><i class="fas fa-file-code"></i></div>
+                    <h3 class="font-bold text-lg mb-2">HTML/CSS Resume</h3>
+                    <p class="text-xs opacity-60">A structured resume project highlighting semantic HTML mastery.</p>
                 </div>
             </div>
-            <div class="absolute top-0 right-0 w-64 h-64 bg-medical/20 blur-[120px]"></div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-slate-400 text-sm uppercase tracking-widest border-t border-slate-200 dark:border-slate-800">
-        Debojyoti Saha &copy; 2024 | Engineering the Future
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto rounded-[3rem] bg-slate-900 p-12 text-white text-center relative overflow-hidden shadow-2xl">
+            <h2 class="text-4xl font-black mb-6">Let's Connect.</h2>
+            <p class="text-slate-400 mb-10 max-w-md mx-auto">Get in touch for medical technology or development collaborations.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:debojyotisaha732138@gmail.com" class="bg-medical px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-all">Email Me</a>
+                <a href="https://linkedin.com/in/debojyotisahatech" target="_blank" class="bg-white/10 px-8 py-4 rounded-2xl font-bold hover:bg-white/20 transition-all">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-slate-500 text-[10px] uppercase tracking-[0.4em]">
+        Debojyoti Saha &copy; 2026 | Kolkata, India
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const p = document.getElementById('preloader');
+                p.style.opacity = '0';
+                setTimeout(() => {
+                    p.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    AOS.init({ duration: 800, once: true });
+                }, 1000);
+            }, 3500);
+        });
 
-        // Custom Cursor Movement
+        const html = document.documentElement;
+        if (!localStorage.theme) localStorage.theme = 'dark';
+        if (localStorage.theme === 'dark') html.classList.add('dark');
+
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
+        document.querySelectorAll('a, button').forEach(l => {
+            l.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            l.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
 
-        // Click effect on cursor
-        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
-        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
-
-        // Dark Mode Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const html = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-        }
-
-        themeToggle.addEventListener('click', () => {
+        document.getElementById('theme-toggle').addEventListener('click', () => {
             html.classList.toggle('dark');
-            if (html.classList.contains('dark')) {
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.theme = 'dark';
-            } else {
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.theme = 'light';
-            }
+            const isDark = html.classList.contains('dark');
+            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.theme = isDark ? 'dark' : 'light';
+        });
+
+        window.addEventListener('scroll', () => {
+            const s = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scroll-progress').style.width = s + "%";
         });
     </script>
 </body>
